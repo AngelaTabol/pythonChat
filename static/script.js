@@ -26,33 +26,28 @@ function sendMessage() {
   });
 }
 
-function receiveMessages() {
-  fetch('/receive')
-      .then(response => response.json())
-      .then(newMessages => {
-          const messagesDiv = document.getElementById('messages');
-          let viewedMessages = JSON.parse(localStorage.getItem('viewedMessages')) || [];
+const eventSource = new EventSource('/events');
+eventSource.onmessage = function (event) {
+  const messagesDiv = document.getElementById('messages');
+  let viewedMessages = JSON.parse(localStorage.getItem('viewedMessages')) || [];
+  const msg = event.data;
 
-          newMessages.forEach(msg => {
-              if (!viewedMessages.some(obj => obj.message === msg)) {
-                  const messageElement = document.createElement('div');
-                  const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }); // Formato de hora
-                  messageElement.innerHTML = `<span class="message-time">${currentTime}</span>: ${msg}`;
-                  messagesDiv.appendChild(messageElement);
-                  viewedMessages.push({ message: msg, time: currentTime });
-              }
-          });
+  if (!viewedMessages.some(obj => obj.message === msg)) {
+      const messageElement = document.createElement('div');
+      const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      messageElement.innerHTML = `<span class="message-time">${currentTime}</span>: ${msg}`;
+      messagesDiv.appendChild(messageElement);
+      viewedMessages.push({ message: msg, time: currentTime });
 
-          // Convertir los objetos a cadenas JSON antes de almacenarlos
-          viewedMessages = JSON.stringify(viewedMessages);
-          localStorage.setItem('viewedMessages', viewedMessages);
+      // Convertir los objetos a cadenas JSON antes de almacenarlos
+      viewedMessages = JSON.stringify(viewedMessages);
+      localStorage.setItem('viewedMessages', viewedMessages);
 
-          //Volver a convertir las cadenas JSON a objetos antes de mostrarlos
-          viewedMessages = JSON.parse(viewedMessages);
-      });
-}
+      // Volver a convertir las cadenas JSON a objetos antes de mostrarlos
+      viewedMessages = JSON.parse(viewedMessages);
+  }
+};
 
-// Mostrar mensajes previamente vistos al cargar la página
 window.addEventListener('load', () => {
   const viewedMessages = JSON.parse(localStorage.getItem('viewedMessages')) || [];
   const messagesDiv = document.getElementById('messages');
@@ -63,5 +58,3 @@ window.addEventListener('load', () => {
       messagesDiv.appendChild(messageElement);
   });
 });
-
-setInterval(receiveMessages, 1000); //Refresh cada cierto tiempo

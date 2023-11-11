@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, Response
 from kafka import KafkaProducer, KafkaConsumer
 from threading import Thread
 import queue
 
 app = Flask(__name__)
 
-#Productor y consumidor de Kafka
+# Productor y consumidor de Kafka
 producer = KafkaProducer(bootstrap_servers=['10.20.10.10:9092'])
 consumer = KafkaConsumer('chat', bootstrap_servers=['10.20.10.10:9092'], auto_offset_reset='earliest')
 
@@ -17,6 +17,12 @@ def kafka_consumer_thread():
 
 consumer_thread = Thread(target=kafka_consumer_thread, daemon=True)
 consumer_thread.start()
+
+#Obtener mensajes
+def event_stream():
+    while True:
+        message = message_queue.get()
+        yield f"data: {message}\n\n"
 
 @app.route('/')
 def index():
@@ -32,12 +38,9 @@ def send_message():
     else:
         return jsonify({'error': 'No se proporcionó mensaje'}), 400
 
-@app.route('/receive')
-def receive_message():
-    messages = []
-    while not message_queue.empty():
-        messages.append(message_queue.get())
-    return jsonify(messages)
+@app.route('/events')
+def sse():
+    return Response(event_stream(), mimetype="text/event-stream")
 
 if __name__ == '__main__':
     app.run(debug=True)
