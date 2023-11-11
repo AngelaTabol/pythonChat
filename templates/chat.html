@@ -1,0 +1,34 @@
+<!-- chat.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat con Kafka</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+        </div>
+        <div class="title-container">
+            <h1>pythonChat</h1>
+            <p class="subtitle">Using Flask + Kafka</p>
+            <p class="author">Joboufra @ 2023</p>
+        </div>
+        
+    </header>
+    <div id="chat-container">
+        <div id="messages"></div>
+        <div id="input-container">
+            <input type="text" id="message-input" placeholder="Escribe un mensaje...">
+            <button onclick="sendMessage()">Enviar</button>
+            <button onclick="clearMessages()" title="Borrar Mensajes">
+                <img src="{{ url_for('static', filename='trash-can.svg') }}" alt="Borrar" />
+            </button>            
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
