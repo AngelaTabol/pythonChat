@@ -13,6 +13,12 @@ socket.on('receive_message', function(data) {
 });
 
 //Funciones
+function convertToLocalTime(utcString) {
+  const utcDate = new Date(utcString);
+  console.log(utcDate.toLocaleTimeString());
+  return utcDate.toLocaleTimeString();
+}
+
 function sendMessage() {
   const messageInput = document.getElementById('message-input');
   const message = messageInput.value;
@@ -21,14 +27,17 @@ function sendMessage() {
   socket.emit('send_message', { message: message });
 }
 
+
 function addMessage(message, time, nickname, color) {
+  const localTime = convertToLocalTime(time);
   const messagesDiv = document.getElementById('messages');
   const messageElement = document.createElement('div');
-  messageElement.innerHTML = `<span class="message-time">[${time}]</span> <span style="color: ${color}"><b>${nickname}</b></span>: ${message}`;
+  messageElement.innerHTML = `<span class="message-time">[${localTime}]</span> <span style="color: ${color}"><b>${nickname}</b></span>: ${message}`;
   messagesDiv.appendChild(messageElement); 
 
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
+
 
 
 function clearMessages() {

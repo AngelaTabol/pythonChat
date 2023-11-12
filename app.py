@@ -2,6 +2,7 @@ from flask import Flask, flash, render_template, request, jsonify, redirect, url
 from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import pytz
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from config import SQLALCHEMY_DATABASE_URI
@@ -13,7 +14,8 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+app.config['IP'] = IP
+app.config['PORT'] = PORT
 
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -140,7 +142,7 @@ def handle_send_message_event(data):
 
         emit('receive_message', {
             'message': message_text,
-            'time': message.timestamp.strftime('%H:%M:%S'),
+            'time': message.timestamp.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z',
             'username': current_user.nickname,
             'color': current_user.color
         }, broadcast=True)
