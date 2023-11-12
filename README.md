@@ -15,7 +15,7 @@ Una aplicación simple de chat creada con Python, usando Flask, WebSockets y Pos
 
 ## Features
 
-- Chat en tiempo real usando WebSockets. [In progress]
+- Chat en tiempo real usando WebSockets.
 - Los mensajes se persisten en una base de datos de PostgreSQL
 - Limpiar historial de chat con un click
 - Gestión de usuarios y autenticación
