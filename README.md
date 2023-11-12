@@ -24,8 +24,15 @@ Una aplicación simple de chat creada con Python, usando Flask, WebSockets y Pos
 ## Requisitos
 
 - **Python**: Debes tener Python instalado en tu sistema. Puedes descargarlo [aquí](https://www.python.org/downloads/).
-- **Flask**: Flask es un framework de Python para construir aplicaciones web. Puedes instalarlo utilizando `pip`: `pip install Flask`
-- Libraries necesarias (Por añadir lista completa)
+- **Flask**: Flask es un microframework de Python para construir aplicaciones web. Puedes instalarlo utilizando `pip`: 
+```bash pip install Flask```
+- **Flask-SocketIO**: Proporciona capacidades de Socket.IO para aplicaciones Flask, usada para la comunicación en tiempo real.** ```bash pip install Flask```
+- **Flask-SQLAlchemy**: Un ORM para Python, usado para interactuar con bases de datos.
+```bash pip install Flask-SQLAlchemy```
+- **Werkzeug**: Una biblioteca WSGI para aplicaciones web en Python. Se utiliza para funciones de seguridad como la generación y verificación de hashes de contraseñas.
+```bash pip install Werkzeug```
+- **Flask-Login**: Proporciona gestión de sesiones de usuario para Flask, utilizada para manejar la autenticación de usuarios.
+```bash pip install Flask-Login```
 
 ## Como funciona la aplicación?
 
