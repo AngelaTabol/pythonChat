@@ -6,9 +6,8 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: self-hosted
-
     steps:
       - name: Clonar Repositorio
         uses: actions/checkout@v3
@@ -26,7 +25,9 @@ jobs:
           echo "IP = '${{ secrets.IP }}'" > config.py
           echo "PORT = ${{ secrets.PORT }}" >> config.py
           echo "SQLALCHEMY_DATABASE_URI = '${{ secrets.SQLALCHEMY_DATABASE_URI }}'" >> config.py
-      - name: Reiniciar Servicio pythonChat
-        run: |
-          sudo systemctl restart pythonChat.service
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Reiniciar servicio
+        run: touch /home/joboufra/actions-pythonChat/deploy/ok
         
