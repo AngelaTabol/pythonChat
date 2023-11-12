@@ -1,4 +1,4 @@
-name: Deploy Flask App - pythonChat
+name: Deploy pythonChat
 
 on:
   push:
@@ -10,28 +10,14 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Checkout de repositorio
-      uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-    - name: Copiar al servidor
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.SERVER_IP }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        source: "."
-        target: "/path/to/your/app"
+    - name: Install Dependencies
+      run: |
+        source venv/bin/activate
+        pip install -r requirements.txt
 
-    - name: Reiniciar servicio
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SERVER_IP }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          cd /path/to/your/app
-          source venv/bin/activate
-          pip install -r requirements.txt
-          sudo systemctl restart pythonChat
+    - name: Restart app
+      run: |
+        sudo systemctl restart app
