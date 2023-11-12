@@ -10,28 +10,19 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Checkout de repositorio
-      uses: actions/checkout@v2
-
-    - name: Copiar al servidor
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.SERVER_IP }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        source: "."
-        target: "/path/to/your/app"
-
-    - name: Reiniciar servicio
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SERVER_IP }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          cd /path/to/your/app
+      - name: Clonar Repositorio
+        uses: actions/checkout@v2
+      - name: Crear Entorno Virtual
+        run: |
+          python3 -m venv venv
+      - name: Activar Entorno Virtual
+        run: |
           source venv/bin/activate
+      - name: Instalar Dependencias
+        run: |
           pip install -r requirements.txt
-          sudo systemctl restart pythonChat
+      - name: Crear archivo config.py
+        run: |
+          echo "IP = '${{ secrets.IP }}'" > config.py
+          echo "PORT = '${{ secrets.PORT }}'" >> config.py
+          echo "SQLALCHEMY_DATABASE_URI = '${{ secrets.SQLALCHEMY_DATABASE_URI }}'" >> config.py
