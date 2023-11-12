@@ -6,6 +6,10 @@ document.getElementById('message-input').addEventListener('keypress', function (
   }
 });
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  convertAllTimestampsToLocal();
+});
+
 const socket = io(); 
 
 socket.on('receive_message', function(data) {
@@ -19,14 +23,30 @@ function convertToLocalTime(utcString) {
   return utcDate.toLocaleTimeString();
 }
 
+function convertAllTimestampsToLocal() {
+  const messageTimes = document.querySelectorAll('.message-time');
+  messageTimes.forEach(span => {
+      const utcString = span.getAttribute('data-utc-time');
+      span.textContent = '[' + convertToLocalTime(utcString) + ']';
+  });
+}
+
+
 function sendMessage() {
   const messageInput = document.getElementById('message-input');
   const message = messageInput.value;
   messageInput.value = '';
 
-  socket.emit('send_message', { message: message });
+  if (message.trim() !== '') {
+      socket.emit('send_message', { message: message });
+  }
 }
 
+function loadInitialMessages() {
+  initialMessages.forEach(message => {
+      addMessage(message.text, message.timestamp, message.nickname, message.color);
+  });
+}
 
 function addMessage(message, time, nickname, color) {
   const localTime = convertToLocalTime(time);
@@ -37,8 +57,6 @@ function addMessage(message, time, nickname, color) {
 
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
-
-
 
 function clearMessages() {
   const messagesDiv = document.getElementById('messages');

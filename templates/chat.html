@@ -26,7 +26,7 @@
             <!-- Iterar sobre los mensajes pasados por Flask -->
             {% for message in messages %}
             <div>
-                <span class="message-time">[{{ message.timestamp.strftime('%H:%M:%S') }}]</span>
+                <span class="message-time" data-utc-time="{{ message.timestamp.isoformat() }}Z">[{{ message.timestamp.strftime('%H:%M:%S') }}]</span>
                 <span style="color: {{ message.color }}"><b>{{ message.nickname }}</b></span>: {{ message.text }}
             </div>
             {% endfor %}
