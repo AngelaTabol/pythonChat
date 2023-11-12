@@ -5,6 +5,13 @@
 
 Una aplicación simple de chat creada con Python, usando Flask, WebSockets y PostgreSQL para tener mensajería en tiempo real y persistencia.
 
+<p align="center">
+  <img src="https://github.com/Joboufra/pythonChat/assets/46650791/d7a44ee8-c475-4a8a-a8d9-c3245dcdb17d" alt="Chat Image 1"/>
+</p>
+<p align="center">
+  <img src="https://github.com/Joboufra/pythonChat/assets/46650791/d05cb60c-a0c1-4ddf-a263-9acaac0c8b55" alt="Chat Image 2"/>
+</p>
+
 ## Tecnologías utilizadas
 
 - Python
