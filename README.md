@@ -1,21 +1,31 @@
 # Python Chat
 
-Una aplicación simple de chat creada con Python, usando Flask, Kafka y WebSockets para mensajería en tiempo real.
+[![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.0.0-green.svg)](https://flask.palletsprojects.com/en/3.0.x/)
+
+Una aplicación simple de chat creada con Python, usando Flask, WebSockets y PostgreSQL para tener mensajería en tiempo real y persistencia.
+
+## Tecnologías utilizadas
+
+- Python
+- Flask
+- WebSocket
+- HTML/CSS
+- JavaScript
 
 ## Features
 
 - Chat en tiempo real usando WebSockets. [In progress]
-- Los mensajes se envían y reciben usando Apache Kafka como broker de mensajería
+- Los mensajes se persisten en una base de datos de PostgreSQL
 - Limpiar historial de chat con un click
-- Gestión de caché de mensajes en LocalStorage
+- Gestión de usuarios y autenticación
+- Customización de usuario (Nickname, color de chat)
 
-## Requisitos del Proyecto
+## Requisitos
 
-- **Python**: Debes tener Python instalado en tu sistema. Puedes descargarlo desde [Python's official website](https://www.python.org/downloads/).
-- **Flask**: Flask es un framework de Python para construir aplicaciones web. Puedes instalarlo utilizando `pip`: pip install Flask
-- **Kafka**: Debes tener Apache Kafka instalado y configurado. Puedes descargarlo desde [Kafka's official website](https://kafka.apache.org/downloads) y seguir las instrucciones de instalación.
-- **kafka-python**: Esta librería te permitirá interactuar con Apache Kafka desde Python. Puedes instalarla con `pip`: pip install kafka-python
-- **WebSocket Library**: Necesitarás una biblioteca de WebSocket para habilitar la comunicación en tiempo real en tu aplicación. Puedes usar una librería como `Flask-SocketIO`.
+- **Python**: Debes tener Python instalado en tu sistema. Puedes descargarlo [aquí](https://www.python.org/downloads/).
+- **Flask**: Flask es un framework de Python para construir aplicaciones web. Puedes instalarlo utilizando `pip`: `pip install Flask`
+- Libraries necesarias (Por añadir lista completa)
 
 ## Como funciona la aplicación?
 
@@ -24,11 +34,3 @@ Una aplicación simple de chat creada con Python, usando Flask, Kafka y WebSocke
 - Puedes hacer click en el botón de la papelera para borrar el historial de chat.
 
 
-## Tecnologías utilizadas
-
-- Python
-- Flask
-- Kafka
-- WebSocket
-- HTML/CSS
-- JavaScript

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat con Kafka</title>
+    <title>pythonChat</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -14,13 +14,21 @@
         </div>
         <div class="title-container">
             <h1>pythonChat</h1>
-            <p class="subtitle">Using Flask + Kafka</p>
+            <p class="subtitle">Usando Flask, PostgreSQL</p>
             <p class="author">Joboufra @ 2023</p>
         </div>
-        
     </header>
     <div id="chat-container">
-        <div id="messages"></div>
+        <div id="messages">
+            <!-- Iterar sobre los mensajes pasados por Flask -->
+            {% for message in messages %}
+            <div>
+                <span class="message-time">{{ message.timestamp.strftime('%H:%M:%S') }}</span>
+                <span style="color: {{ message.color }}">{{ message.username }}</span>: {{ message.text }}
+            </div>
+            {% endfor %}
+        </div>
+        
         <div id="input-container">
             <input type="text" id="message-input" placeholder="Escribe un mensaje...">
             <button onclick="sendMessage()">Enviar</button>
@@ -29,6 +37,7 @@
             </button>            
         </div>
     </div>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
