@@ -26,3 +26,7 @@ jobs:
           echo "IP = '${{ secrets.IP }}'" > config.py
           echo "PORT = ${{ secrets.PORT }}" >> config.py
           echo "SQLALCHEMY_DATABASE_URI = '${{ secrets.SQLALCHEMY_DATABASE_URI }}'" >> config.py
+      - name: Reiniciar Servicio pythonChat
+        run: |
+          sudo systemctl restart pythonChat.service
+        
