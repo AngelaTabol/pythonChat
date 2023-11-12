@@ -11,14 +11,10 @@ jobs:
     steps:
       - name: Clonar Repositorio
         uses: actions/checkout@v3
-      - name: Crear Entorno Virtual
+      - name: Crear y activar entorno virtual, instalar dependencias
         run: |
           python3 -m venv venv
-      - name: Activar Entorno Virtual
-        run: |
           source venv/bin/activate
-      - name: Instalar Dependencias
-        run: |
           pip install -r requirements.txt
       - name: Crear archivo config.py
         run: |
@@ -29,5 +25,4 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Reiniciar servicio
-        run: touch /home/joboufra/actions-pythonChat/deploy/ok
-        
+        run: sudo systemctl restart pythonchat.service
