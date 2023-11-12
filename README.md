@@ -2,15 +2,13 @@
 
 [![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.0.0-green.svg)](https://flask.palletsprojects.com/en/3.0.x/)
-[![Kafka](https://img.shields.io/badge/Kafka-3.6.0-red.svg)](https://kafka.apache.org/)
 
-Una aplicación simple de chat creada con Python, usando Flask, Kafka y WebSockets para mensajería en tiempo real.
+Una aplicación simple de chat creada con Python, usando Flask, WebSockets y PostgreSQL para tener mensajería en tiempo real y persistencia.
 
 ## Tecnologías utilizadas
 
-- Python 
+- Python
 - Flask
-- Kafka
 - WebSocket
 - HTML/CSS
 - JavaScript
@@ -18,18 +16,16 @@ Una aplicación simple de chat creada con Python, usando Flask, Kafka y WebSocke
 ## Features
 
 - Chat en tiempo real usando WebSockets. [In progress]
-- Los mensajes se envían y reciben usando Apache Kafka como broker de mensajería
-- Gestión de caché de mensajes en LocalStorage
+- Los mensajes se persisten en una base de datos de PostgreSQL
 - Limpiar historial de chat con un click
-
+- Gestión de usuarios y autenticación
+- Customización de usuario (Nickname, color de chat)
 
 ## Requisitos
 
-- **Kafka**: Debes tener Apache Kafka instalado y configurado correctamente. Puedes descargarlo [aquí](https://kafka.apache.org/downloads) y seguir las instrucciones de instalación.
 - **Python**: Debes tener Python instalado en tu sistema. Puedes descargarlo [aquí](https://www.python.org/downloads/).
-- **Flask**: Flask es un framework de Python para construir aplicaciones web. Puedes instalarlo utilizando `pip`: ```pip install Flask```
-- **kafka-python**: Esta librería te permitirá interactuar con Apache Kafka desde Python. Puedes instalarla con `pip`: ```pip install kafka-python```
-
+- **Flask**: Flask es un framework de Python para construir aplicaciones web. Puedes instalarlo utilizando `pip`: `pip install Flask`
+- Libraries necesarias (Por añadir lista completa)
 
 ## Como funciona la aplicación?
 
