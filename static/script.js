@@ -19,7 +19,6 @@ socket.on('receive_message', function(data) {
 //Funciones
 function convertToLocalTime(utcString) {
   const utcDate = new Date(utcString);
-  console.log(utcDate.toLocaleTimeString());
   return utcDate.toLocaleTimeString();
 }
 
