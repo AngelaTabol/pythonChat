@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="logo-container">
-            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+            <img src="{{ url_for('static', filename='logo.webp') }}" alt="Logo" class="logo">
         </div>
         <div class="title-container">
             <h1>Conéctate a pythonChat</h1>
@@ -20,7 +20,7 @@
             <input type="text" id="username" name="username" placeholder="Usuario" required>
             <input type="password" id="password" name="password" placeholder="Contraseña" required>
             <button type="submit">Conectarse</button>
-            <p style="text-align:center; margin-top: 30px; margin-bottom: 0px;">¿No tienes una cuenta? <a style="color: red;" href="{{ url_for('register') }}">Regístrate aquí</a></p>
+            <p class="login-subtitle">¿No tienes una cuenta? <a style="color: rgb(0, 183, 255);" href="{{ url_for('register') }}">Regístrate aquí</a></p>
         </form>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>

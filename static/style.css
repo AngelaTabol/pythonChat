@@ -1,75 +1,75 @@
 /* style.css */
 body {
   font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #121212;
+  background-image: radial-gradient(circle at center, rgba(4, 86, 141, 0.8), rgba(8, 79, 126, 0.8));
+  background-color: rgba(18, 18, 18, 0.7);
+  backdrop-filter: blur(10px);
   color: #fff; 
   display: flex;
   flex-direction: column; 
   align-items: center;
-  height: 100vh;
+  height: 100%;
+  margin: 0px;
 }
 
 img.logo {
-  max-width: 150px; 
+  max-width: 100px; 
   height: auto;
-  margin-top: 25px;
 }
 
 header {
+  margin-top: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between; 
   text-align: center;
+  gap: 20px;
   margin-bottom: 20px;
 }
 
-.logo-container {
-  margin-left: 20px; 
-}
-
-.title-container {
-  flex-grow: 1; 
-  text-align: left; 
-  margin-left: 20px;
-}
+/* */
+/* */
+/* Estilos específicos para el contenedor de mensajes */
+/* */
+/* */
 
 #chat-container {
-  width: 100%;
-  max-width: 800px;
+  height: 85%;
+  width: 95%;
   margin-top: 15px;
-  background-color: #1e1e1e;
-  padding: 20px;
+  margin-bottom: 15px;
+  background-color: rgb(0, 0, 0, 0.5);
+  padding: 15px;
   border-radius: 8px; 
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
-.message-time {
-  color: #a8a8a8;
-}
-
 #messages {
-  height: 500px;
-  overflow-y: auto;
-  border: 1px solid #333; 
-  background-color: #252526; 
+  min-height: 65vh; 
+  max-height: 65vh; 
   padding: 10px;
-  margin-bottom: 20px;
+  border: none;
+  background-color: rgb(0, 0, 0, 0.5);
+  margin-bottom: 2%;
+  overflow-y: auto;
+  .message-time {
+    color: #a8a8a8;
+  }
+
 }
 
 #input-container {
   display: flex; 
-  align-items: center; 
+  align-items: center;
+  gap: 5px;
 }
 
 input[type="text"] {
-  flex-grow: 1; 
+  flex-grow: 1;
   padding: 10px;
   border: 1px solid #333;
   background-color: #1e1e1e;
   color: white;
-  margin-right: 10px; 
   border-radius: 4px;
 }
 
@@ -79,16 +79,15 @@ button {
   justify-content: center; 
   padding: 10px;
   border: none;
-  background-color: #0056b3; 
+  background-color: #0357b1;
   color: white;
   cursor: pointer;
   border-radius: 4px;
-  transition: background-color 0.3s;
-  white-space: nowrap; 
+  transition: background-color 0.1s;
 }
 
 button:hover {
-  background-color: #014792; 
+  background-color: #02448b; 
 }
 
 button img {
@@ -100,22 +99,11 @@ button img {
 button[onclick*="clearMessages"] {
   scale: 80%;
   border-radius: 5px;
-  background-color: #41464b; 
-  margin-left: 10px; 
+  background-color: #a10606;
 }
 
 button[onclick*="clearMessages"]:hover {
-  background-color: #a10606; 
-}
-
-@media (max-width: 600px) {
-  input[type="text"] {
-      width: calc(100% - 120px); 
-  }
-
-  button {
-      margin-right: 0;
-  }
+  background-color: #5c0404; 
 }
 
 /* */
@@ -126,15 +114,14 @@ button[onclick*="clearMessages"]:hover {
 
 #register-container {
   width: 100%;
-  max-width: 500px; /* o el ancho que prefieras */
-  background-color: #1e1e1e;
+  max-width: 500px;
+  background-color: rgb(0, 0, 0, 0.5);
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   margin-top: 25px;
 }
 
-/* Estilos específicos para el formulario de registro */
 #register-form {
   display: flex;
   flex-direction: column;
@@ -149,9 +136,9 @@ button[onclick*="clearMessages"]:hover {
 }
 
 #register-form .form-group label {
-  flex-basis: 30%; /* Ajusta según la longitud de tus etiquetas */
-  text-align: right;
-  margin-right: 10px;
+  flex-basis: 25%;
+  margin-left: 2px;
+  text-align: left;
 }
 
 #register-form .form-group input[type="text"],
@@ -159,11 +146,10 @@ button[onclick*="clearMessages"]:hover {
 #register-form .form-group input[type="color"] {
   flex-grow: 1;
   padding: 10px;
-  border: 1px solid #333;
-  background-color: #1e1e1e;
+  border: 0;
+  background-color: rgba(27, 27, 27);
   color: white;
   border-radius: 4px;
-  margin-right: 0px;
 }
 
 #register-form button {
@@ -173,7 +159,7 @@ button[onclick*="clearMessages"]:hover {
   color: white;
   cursor: pointer;
   border-radius: 4px;
-  transition: background-color 0.3s;
+  transition: background-color 0.1s;
 }
 
 #register-form button:hover {
@@ -181,31 +167,12 @@ button[onclick*="clearMessages"]:hover {
 }
 
 #register-form .form-group input[type="color"] {
-  width: auto; /* Establece el ancho automático para el selector de color */
+  width: auto; 
   height: 50px;
-  padding: 0; /* Elimina el relleno para evitar espacio adicional */
-  border: none; /* Elimina el borde predeterminado */
+  padding: 0; 
+  border: none;
+  background-color: transparent;
 }
-
-/* Estilos responsivos para dispositivos móviles */
-@media (max-width: 600px) {
-  #register-form .form-group {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  #register-form .form-group label {
-    text-align: left;
-    margin-bottom: 5px;
-  }
-
-  #register-form .form-group input,
-  #register-form button {
-    width: 100%;
-  }
-}
-
-
 
 /* */
 /* */
@@ -214,9 +181,9 @@ button[onclick*="clearMessages"]:hover {
 /* */
 
 #login-container {
-  width: 100%;
+  width: 90%;
   max-width: 500px;
-  background-color: #1e1e1e;
+  background-color: rgb(0, 0, 0, 0.5);
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -232,9 +199,9 @@ button[onclick*="clearMessages"]:hover {
 #login-form input[type="text"],
 #login-form input[type="password"] {
   padding: 10px;
-  margin-bottom: 15px; /* espacio entre los campos */
-  border: 1px solid #333;
-  background-color: #1e1e1e;
+  margin-bottom: 15px;
+  border: 0;
+  background-color: rgba(27, 27, 27);
   color: white;
   border-radius: 4px;
   margin-right: 0px;
@@ -254,6 +221,13 @@ button[onclick*="clearMessages"]:hover {
   background-color: #014792;
 }
 
+.login-subtitle {
+  text-align:center;
+  font-size: small;
+  margin-top: 30px; 
+  margin-bottom: 15px;
+}
+
 /* Estilos para el enlace de registro */
 #login-form a {
   text-align: center;
@@ -264,4 +238,151 @@ button[onclick*="clearMessages"]:hover {
 
 #login-form a:hover {
   text-decoration: underline;
+}
+
+/* Estilos para la sección de usuario */
+#user-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.1);
+  border-style:solid;
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* */
+/* */
+/* Estilos para el footer */
+/* */
+/* */
+
+footer {
+  display: flex;
+  justify-content: center;
+  font-size: medium;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  margin-top: 25px;
+}
+
+/* */
+/* */
+/* Estilo NavBar */
+/* */
+/* */
+
+nav {
+  display: flex;
+  margin: 0;
+  justify-content: space-between;
+  width: 95%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  width: 100%;
+
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-left h1 {
+  margin: 0;
+}
+
+.nav-left img.logo {
+  width: 30px; 
+  padding: 10px;
+  margin-left: 10px;
+  height: auto;
+}
+
+.logout-button {
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  border-radius: 4px;
+}
+
+.logout-img {
+  width: 20px;
+  height: 20px;
+}
+
+.logout-button {
+  background-color: rgb(179, 34, 34);
+  margin-right: 10px;
+}
+
+.logout-button:hover {
+  background-color: rgb(143, 26, 26);
+}
+
+@media screen and (max-width: 768px) {
+  #chat-container {
+    width: 100%;
+    margin-top: 0px;
+  }
+  #messages{
+    width: 100%;
+  }
+  #input-container {
+    width: 100%;
+    margin-left: 10px;
+  }
+  .logout-button {
+    width: 40px;
+    height: 40px;
+  }
+  button[onclick*="clearMessages"] {
+    scale: 80%;
+    border-radius: 5px;
+    background-color: #a10606;
+    margin-right: 10px;
+  }
+  nav, footer {
+    display: flex;
+    width: 100%;
+    margin-top: 0;
+    border: 0;
+    font-size: medium;
+  }
+  .nav-left {
+    scale: 80%;
+  }
+  .nav-right {
+    scale: 80%;
+  }
+  header {
+    scale: 80%;
+  }
+
+  #register-container, #login-container {
+    width: 65%; /* Ajustar el ancho de los contenedores de formulario */
+  }
+
+  #register-form .form-group, #login-form .form-group {
+    flex-direction: column; /* Apilar etiquetas y campos de entrada */
+  }
+
+  #register-form .form-group label, #login-form .form-group label {
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  #register-form .form-group input[type="text"],  #register-form .form-group input[type="password"]{
+    width: 90%;
+  }
+
+  #register-form .form-group input[type="color"] {
+  width: 50%;
+  }
 }

@@ -9,7 +9,7 @@
 <body>
   <header>
       <div class="logo-container">
-          <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+          <img src="{{ url_for('static', filename='logo.webp') }}" alt="Logo" class="logo">
       </div>
       <div class="title-container">
           <h1>Regístrate en pythonChat</h1>
@@ -18,28 +18,26 @@
   <div id="register-container">
     <form id="register-form" method="post" action="{{ url_for('register') }}" class="form-container">
         <div class="form-group">
-            <label for="username">Usuario:</label>
-            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="text" id="username" name="Nombre de usuario" placeholder="Usuario" required>
         </div>
 
         <div class="form-group">
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="password" name="Contraseña" placeholder="Contraseña" required>
         </div>
 
         <div class="form-group">
-            <label for="nickname">Nick:</label>
-            <input type="text" id="nickname" name="nickname" placeholder="Nickname" required>
+            <input type="text" id="nickname" name="Nick" placeholder="Nickname" required>
         </div>
 
         <div class="form-group">
-          <label for="color">Color para tu nick:</label>
+          <label for="color">Color del nick:</label>
           <input type="color" id="color" name="color" class="color-input" required>
       </div>
-
         <button type="submit">Crear cuenta</button>
+        <button onclick="window.location.href='/'" style="margin-top: 10px; background-color: rgb(75, 74, 74, 0.8);" type="back">Volver a inicio</button>
     </form>
 </div>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
+
 </html>
