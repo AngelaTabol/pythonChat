@@ -5,12 +5,15 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from config import SQLALCHEMY_DATABASE_URI
+from config import IP
+from config import PORT
 import os
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -25,7 +28,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(256))
     nickname = db.Column(db.String(80), unique=True, nullable=False)
-    color = db.Column(db.String(7))  #Almacena un color en formato HEX
+    color = db.Column(db.String(7))
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -51,8 +54,6 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 #Autenticación
-from flask import flash
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -104,18 +105,24 @@ def register():
 
 socketio = SocketIO(app)
 
+@app.route('/update_color', methods=['POST'])
+@login_required
+def update_color():
+    data = request.json
+    current_user.color = data['color']
+    db.session.commit()
+    return jsonify({'status': 'success', 'message': 'Color actualizado'})
+
 @app.route('/')
 @login_required
 def index():
-    # Modifica esta consulta para incluir información del usuario
-    last_messages = Message.query.order_by(Message.timestamp.desc()).limit(10).all()
+    last_messages = Message.query.order_by(Message.timestamp.desc()).limit(20).all()
     last_messages = last_messages[::-1]
 
-    # Preparar los datos para la plantilla
     messages_with_user_info = [{
         'text': message.message,
         'timestamp': message.timestamp,
-        'username': message.user.username,
+        'nickname': message.user.nickname,
         'color': message.user.color
     } for message in last_messages]
 
@@ -134,11 +141,11 @@ def handle_send_message_event(data):
         emit('receive_message', {
             'message': message_text,
             'time': message.timestamp.strftime('%H:%M:%S'),
-            'nickname': current_user.nickname,
+            'username': current_user.nickname,
             'color': current_user.color
         }, broadcast=True)
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    socketio.run(app, debug=True)
+    socketio.run(app, host=IP, port=PORT, debug=True)
