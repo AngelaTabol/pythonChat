@@ -6,9 +6,9 @@ document.getElementById('message-input').addEventListener('keypress', function (
   }
 });
 
-document.addEventListener('DOMContentLoaded', (event) => {
+window.onload = function() {
   convertAllTimestampsToLocal();
-});
+};
 
 const socket = io(); 
 
